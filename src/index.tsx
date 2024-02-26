@@ -258,15 +258,11 @@ interface DemoTaskNodeProps {
 
 const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({ element }) => {
     const data = element.getData();
-    const style = data?.style || {}; // Retrieve style object, default to empty object if not present
-
-    const whenDecorator = data?.whenStatus ? (
-        <WhenDecorator element={element} status={data.whenStatus} leftOffset={DEFAULT_WHEN_OFFSET} />
-    ) : null;
+    const label = data?.hash ? `${data.hash}` : null; // Include hash in label if present
 
     return (
-        <TaskNode element={element} status={data?.status} style={style}>
-            {whenDecorator}
+        <TaskNode element={element} status={data?.status}>
+            <text>{label}</text>
         </TaskNode>
     );
 };
