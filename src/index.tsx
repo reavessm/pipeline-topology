@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "@patternfly/react-core/dist/styles/base.css";
 import './fonts.css';
+import './pipeline-styles.css';
 
 import '@patternfly/react-topology/patternfly-docs/content/examples/./topology-pipelines-example.css';
 import * as React from 'react';
@@ -38,6 +39,7 @@ import {
     getSpacerNodes,
     PipelineDagreLayout
 } from '@patternfly/react-topology';
+import {CSSProperties} from "react";
 
 const HEIGHT = 75;
 const WIDTH = 225;
@@ -193,7 +195,7 @@ const TASK_NODES: PipelineNodeModel[] = [
         data: {
             status: RunStatus.Succeeded,
             gating: true,
-            hash: 'spaghet'
+            hash: 'spaghet1234'
         }
     },
     {
@@ -209,7 +211,7 @@ const TASK_NODES: PipelineNodeModel[] = [
         data: {
             status: RunStatus.Succeeded,
             gating: true,
-            hash: 'spaghet'
+            hash: 'spaghet2345'
         }
     },
     {
@@ -225,7 +227,7 @@ const TASK_NODES: PipelineNodeModel[] = [
         data: {
             status: RunStatus.Succeeded,
             gating: true,
-            hash: 'spaghet'
+            hash: 'spaghet3456'
         }
     },
     {
@@ -256,17 +258,14 @@ interface DemoTaskNodeProps {
 
 const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({ element }) => {
     const data = element.getData();
-
-    // show hash
-    const hash = data?.hash ? <div>Hash: {data.hash}</div> : null;
+    const style = data?.style || {}; // Retrieve style object, default to empty object if not present
 
     const whenDecorator = data?.whenStatus ? (
         <WhenDecorator element={element} status={data.whenStatus} leftOffset={DEFAULT_WHEN_OFFSET} />
     ) : null;
 
     return (
-        <TaskNode element={element} status={data?.status}>
-            hash
+        <TaskNode element={element} status={data?.status} style={style}>
             {whenDecorator}
         </TaskNode>
     );
@@ -328,8 +327,7 @@ export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
     controller.registerLayoutFactory((type: string, graph: Graph): Layout | undefined => new PipelineDagreLayout(graph));
     const spacerNodes = getSpacerNodes(TASK_NODES);
     const nodes = [...TASK_NODES, ...spacerNodes];
-    //const edges = EDGE_MODEL;
-    const edges = getEdgesFromNodes(TASK_NODES)
+    const edges = getEdgesFromNodes(TASK_NODES);
 
     const model: Model = {
         nodes,
@@ -345,7 +343,9 @@ export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
 
     return (
         <VisualizationProvider controller={controller}>
-            <VisualizationSurface />
+            <div style={{ width: '100vh', height: '100vw' }}> {/*make visualization surface area larger*/}
+                <VisualizationSurface />
+            </div>
         </VisualizationProvider>
     );
 };
