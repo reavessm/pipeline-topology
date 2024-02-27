@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 import "@patternfly/react-core/dist/styles/base.css";
 import './fonts.css';
 import './pipeline-styles.css';
+import {buildNodeAndEdgeModels} from './pipeline-to-node-and-edge';
 
 import '@patternfly/react-topology/patternfly-docs/content/examples/./topology-pipelines-example.css';
 import * as React from 'react';
@@ -37,6 +38,8 @@ import {
     getEdgesFromNodes,
     DefaultEdge,
     getSpacerNodes,
+    LabelPosition,
+    NodeShape,
     PipelineDagreLayout
 } from '@patternfly/react-topology';
 import {CSSProperties} from "react";
@@ -210,7 +213,7 @@ const TASK_NODES: PipelineNodeModel[] = [
         runAfterTasks: ['int'],
         data: {
             status: RunStatus.Succeeded,
-            gating: true,
+            gating: false,
             hash: 'spaghet2345'
         }
     },
@@ -236,6 +239,7 @@ const TASK_NODES: PipelineNodeModel[] = [
         label: 'Finally task 0',
         width: 156,
         height: 32,
+        runAfterTasks: ['stage'],
         style: {
             paddingLeft: 24
         }
@@ -246,6 +250,7 @@ const TASK_NODES: PipelineNodeModel[] = [
         label: 'Finally task 1',
         width: 156,
         height: 32,
+        runAfterTasks: ['stage'],
         style: {
             paddingLeft: 24
         }
@@ -317,6 +322,9 @@ export const PipelineTasks: React.FC = () => {
 PipelineTasks.displayName = 'PipelineTasks';
 
 export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
+    // let { nodes, edges } = buildNodeAndEdgeModels({ pipelineNodes: TASK_NODES });
+    // console.log(nodes);
+    // console.log(edges);
     const controller = new Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
