@@ -3,6 +3,15 @@
     "target": "es5",
     "lib": ["es2015", "dom"],
     "jsx": "react",
-    "allowSyntheticDefaultImports": true
-  }
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@patternfly/react-core": ["./node_modules/@patternfly/react-core/dist/types"]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "custom.d.ts"
+  ]
 }
