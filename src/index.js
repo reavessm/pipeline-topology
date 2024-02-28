@@ -1,19 +1,11 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TopologyPipelinesGettingStartedDemo = exports.PipelineTasks = void 0;
 var client_1 = require("react-dom/client");
 require("@patternfly/react-core/dist/styles/base.css");
 require("./fonts.css");
 require("./pipeline-styles.css");
+var pipeline_to_node_and_edge_1 = require("./pipeline-to-node-and-edge");
 require("@patternfly/react-topology/patternfly-docs/content/examples/./topology-pipelines-example.css");
 var React = require("react");
 var react_topology_1 = require("@patternfly/react-topology");
@@ -227,22 +219,35 @@ var TASK_NODES = [
         }
     }
 ];
+// const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({ element }) => {
+//     // const [showPopup, setShowPopup] = React.useState(false);
+//     const data = element.getData();
+//     const label = data?.hash ? `${data.hash}` : null; // Include hash in label if present
+//
+//     // const handleMouseEnter = () => {
+//     //     setShowPopup(true);
+//     //     console.log('showing popup');
+//     // }
+//     //
+//     // const handleMouseLeave = () => {
+//     //     setShowPopup(false);
+//     //     console.log('hiding popup');
+//     // }
+//
+//     return (
+//         <TaskNode element={element} status={data?.status}>
+//             <text>
+//                 {label}
+//             </text>
+//             {/*{showPopup && <div className="popup" style={{ zIndex: 999, width: '200px', height: '200px' }}>{JSON.stringify(data)}</div>}*/}
+//         </TaskNode>
+//     );
+// };
 var DemoTaskNode = function (_a) {
     var element = _a.element;
-    var _b = React.useState(false), showPopup = _b[0], setShowPopup = _b[1];
     var data = element.getData();
     var label = (data === null || data === void 0 ? void 0 : data.hash) ? "".concat(data.hash) : null; // Include hash in label if present
-    var handleMouseEnter = function () {
-        setShowPopup(true);
-        console.log('showing popup');
-    };
-    var handleMouseLeave = function () {
-        setShowPopup(false);
-        console.log('hiding popup');
-    };
-    return (React.createElement(react_topology_1.TaskNode, { element: element, status: data === null || data === void 0 ? void 0 : data.status },
-        React.createElement("text", { onMouseEnter: handleMouseEnter, onMouseLeave: handleMouseLeave }, label),
-        showPopup && React.createElement("div", { className: "popup" }, JSON.stringify(data))));
+    return (React.createElement(react_topology_1.TaskNode, { element: element, status: data === null || data === void 0 ? void 0 : data.status, toolTip: JSON.stringify(data) }));
 };
 var pipelineComponentFactory = function (kind, type) {
     if (kind === react_topology_1.ModelKind.graph) {
@@ -285,7 +290,7 @@ var PipelineTasks = function () {
 exports.PipelineTasks = PipelineTasks;
 exports.PipelineTasks.displayName = 'PipelineTasks';
 var TopologyPipelinesGettingStartedDemo = function () {
-    // let { nodes, edges } = buildNodeAndEdgeModels({ pipelineNodes: TASK_NODES });
+    var _a = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: TASK_NODES }), nodes = _a.nodes, edges = _a.edges;
     // console.log(nodes);
     // console.log(edges);
     var controller = new react_topology_1.Visualization();
@@ -293,8 +298,8 @@ var TopologyPipelinesGettingStartedDemo = function () {
     controller.registerComponentFactory(pipelineComponentFactory);
     controller.registerLayoutFactory(function (type, graph) { return new react_topology_1.PipelineDagreLayout(graph); });
     var spacerNodes = (0, react_topology_1.getSpacerNodes)(TASK_NODES);
-    var nodes = __spreadArray(__spreadArray([], TASK_NODES, true), spacerNodes, true);
-    var edges = (0, react_topology_1.getEdgesFromNodes)(TASK_NODES);
+    // const nodes = [...TASK_NODES, ...spacerNodes];
+    // const edges = getEdgesFromNodes(TASK_NODES);
     var model = {
         nodes: nodes,
         edges: edges,

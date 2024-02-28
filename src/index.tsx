@@ -263,12 +263,9 @@ interface DemoTaskNodeProps {
 
 const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({ element }) => {
     const data = element.getData();
-    const label = data?.hash ? `${data.hash}` : null; // Include hash in label if present
 
     return (
-        <TaskNode element={element} status={data?.status}>
-            <text>{label}</text>
-        </TaskNode>
+        <TaskNode element={element} status={data?.status} toolTip={JSON.stringify(data)}></TaskNode>
     );
 };
 
@@ -278,7 +275,7 @@ const pipelineComponentFactory = (kind: ModelKind, type: string) => {
     }
     switch (type) {
         case DEFAULT_TASK_NODE_TYPE:
-            return DemoTaskNode;
+            return DemoTaskNode; // TODO: as far as I can assume all nodes should be this type <-
         case DEFAULT_FINALLY_NODE_TYPE:
             return FinallyNode;
         case 'task-group':
@@ -322,7 +319,7 @@ export const PipelineTasks: React.FC = () => {
 PipelineTasks.displayName = 'PipelineTasks';
 
 export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
-    // let { nodes, edges } = buildNodeAndEdgeModels({ pipelineNodes: TASK_NODES });
+    let { nodes, edges } = buildNodeAndEdgeModels({ pipelineNodes: TASK_NODES });
     // console.log(nodes);
     // console.log(edges);
     const controller = new Visualization();
@@ -330,8 +327,8 @@ export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
     controller.registerComponentFactory(pipelineComponentFactory);
     controller.registerLayoutFactory((type: string, graph: Graph): Layout | undefined => new PipelineDagreLayout(graph));
     const spacerNodes = getSpacerNodes(TASK_NODES);
-    const nodes = [...TASK_NODES, ...spacerNodes];
-    const edges = getEdgesFromNodes(TASK_NODES);
+    // const nodes = [...TASK_NODES, ...spacerNodes];
+    // const edges = getEdgesFromNodes(TASK_NODES);
 
     const model: Model = {
         nodes,
