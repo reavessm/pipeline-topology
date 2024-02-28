@@ -2,7 +2,7 @@
   "name": "choreography",
   "version": "1.0.0",
   "description": "Pipeline visualizer for Backstage",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "react-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@patternfly/react-core": "^5.2.0",
+    "@patternfly/react-icons": "^5.2.0",
     "@patternfly/react-topology": "^5.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

@@ -2,6 +2,8 @@ import { createRoot } from "react-dom/client";
 import "@patternfly/react-core/dist/styles/base.css";
 import './fonts.css';
 import './pipeline-styles.css';
+import {buildNodeAndEdgeModels} from './pipeline-to-node-and-edge';
+import * as _ from '@patternfly/react-icons';
 
 import '@patternfly/react-topology/patternfly-docs/content/examples/./topology-pipelines-example.css';
 import * as React from 'react';

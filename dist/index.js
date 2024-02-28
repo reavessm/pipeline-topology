@@ -9,8 +9,9 @@ var pipeline_to_node_and_edge_1 = require("./pipeline-to-node-and-edge");
 require("@patternfly/react-topology/patternfly-docs/content/examples/./topology-pipelines-example.css");
 var React = require("react");
 var react_topology_1 = require("@patternfly/react-topology");
-var HEIGHT = 75;
-var WIDTH = 225;
+// import {CSSProperties} from "react";
+// const HEIGHT = 75;
+// const WIDTH = 225;
 // NODE AND EDGE APPROACH
 // const EDGE_MODEL = [
 //     {
@@ -219,34 +220,9 @@ var TASK_NODES = [
         }
     }
 ];
-// const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({ element }) => {
-//     // const [showPopup, setShowPopup] = React.useState(false);
-//     const data = element.getData();
-//     const label = data?.hash ? `${data.hash}` : null; // Include hash in label if present
-//
-//     // const handleMouseEnter = () => {
-//     //     setShowPopup(true);
-//     //     console.log('showing popup');
-//     // }
-//     //
-//     // const handleMouseLeave = () => {
-//     //     setShowPopup(false);
-//     //     console.log('hiding popup');
-//     // }
-//
-//     return (
-//         <TaskNode element={element} status={data?.status}>
-//             <text>
-//                 {label}
-//             </text>
-//             {/*{showPopup && <div className="popup" style={{ zIndex: 999, width: '200px', height: '200px' }}>{JSON.stringify(data)}</div>}*/}
-//         </TaskNode>
-//     );
-// };
 var DemoTaskNode = function (_a) {
     var element = _a.element;
     var data = element.getData();
-    var label = (data === null || data === void 0 ? void 0 : data.hash) ? "".concat(data.hash) : null; // Include hash in label if present
     return (React.createElement(react_topology_1.TaskNode, { element: element, status: data === null || data === void 0 ? void 0 : data.status, toolTip: JSON.stringify(data) }));
 };
 var pipelineComponentFactory = function (kind, type) {
@@ -255,7 +231,7 @@ var pipelineComponentFactory = function (kind, type) {
     }
     switch (type) {
         case react_topology_1.DEFAULT_TASK_NODE_TYPE:
-            return DemoTaskNode;
+            return DemoTaskNode; // TODO: as far as I can assume all nodes should be this type <-
         case react_topology_1.DEFAULT_FINALLY_NODE_TYPE:
             return react_topology_1.FinallyNode;
         case 'task-group':
@@ -296,7 +272,7 @@ var TopologyPipelinesGettingStartedDemo = function () {
     var controller = new react_topology_1.Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
-    controller.registerLayoutFactory(function (type, graph) { return new react_topology_1.PipelineDagreLayout(graph); });
+    controller.registerLayoutFactory(function (_type, graph) { return new react_topology_1.PipelineDagreLayout(graph); });
     var spacerNodes = (0, react_topology_1.getSpacerNodes)(TASK_NODES);
     // const nodes = [...TASK_NODES, ...spacerNodes];
     // const edges = getEdgesFromNodes(TASK_NODES);
