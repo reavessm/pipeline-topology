@@ -2,7 +2,6 @@ import { createRoot } from "react-dom/client";
 import "@patternfly/react-core/dist/styles/base.css";
 import './fonts.css';
 import './pipeline-styles.css';
-import {buildNodeAndEdgeModels} from './pipeline-to-node-and-edge';
 
 import '@patternfly/react-topology/patternfly-docs/content/examples/./topology-pipelines-example.css';
 import * as React from 'react';
@@ -23,29 +22,25 @@ import {
     DEFAULT_TASK_NODE_TYPE,
     DEFAULT_EDGE_TYPE,
     DEFAULT_SPACER_NODE_TYPE,
-    DEFAULT_WHEN_OFFSET,
     Node,
-    WhenDecorator,
     RunStatus,
     Graph,
+    GraphModel,
     Layout,
     Model,
-    NodeModel,
-    NodeStatus,
-    EdgeModel,
-    EdgeStyle,
     PipelineNodeModel,
     getEdgesFromNodes,
     DefaultEdge,
     getSpacerNodes,
-    LabelPosition,
-    NodeShape,
-    PipelineDagreLayout
+    PipelineDagreLayout,
+    ComponentFactory,
+    NodeModel,
+    GraphElement
 } from '@patternfly/react-topology';
-import {CSSProperties} from "react";
+// import {CSSProperties} from "react";
 
-const HEIGHT = 75;
-const WIDTH = 225;
+// const HEIGHT = 75;
+// const WIDTH = 225;
 
 // NODE AND EDGE APPROACH
 // const EDGE_MODEL = [
@@ -258,7 +253,7 @@ const TASK_NODES: PipelineNodeModel[] = [
 ];
 
 interface DemoTaskNodeProps {
-    element: Node;
+    element: Node<NodeModel, any> | Graph<GraphModel, any> | GraphElement;
 }
 
 const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({ element }) => {
@@ -269,7 +264,7 @@ const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({ element }) =
     );
 };
 
-const pipelineComponentFactory = (kind: ModelKind, type: string) => {
+const pipelineComponentFactory: ComponentFactory = (kind: ModelKind, type: string) => {
     if (kind === ModelKind.graph) {
         return GraphComponent;
     }
@@ -325,7 +320,7 @@ export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
     const controller = new Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
-    controller.registerLayoutFactory((type: string, graph: Graph): Layout | undefined => new PipelineDagreLayout(graph));
+    controller.registerLayoutFactory((_type: string, graph: Graph): Layout | undefined => new PipelineDagreLayout(graph));
     const spacerNodes = getSpacerNodes(TASK_NODES);
     // const nodes = [...TASK_NODES, ...spacerNodes];
     // const edges = getEdgesFromNodes(TASK_NODES);
@@ -352,4 +347,4 @@ export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
 };
 
 const container = document.getElementById("root");
-createRoot(container).render(<TopologyPipelinesGettingStartedDemo />);
+createRoot(container!).render(<TopologyPipelinesGettingStartedDemo />);
