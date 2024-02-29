@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "react-scripts start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mkdir -p dist && cp src/*.css dist && tsc"
   },
   "keywords": [],
   "author": "",
