@@ -4,14 +4,17 @@
     "lib": ["es2015", "dom"],
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
+    "outDir": "dist/",
     "paths": {
       "@patternfly/react-core": ["./node_modules/@patternfly/react-core/dist/types"]
     }
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist/**"
   ],
   "include": [
-    "custom.d.ts"
+    "custom.d.ts",
+    "src/*.tsx"
   ]
 }

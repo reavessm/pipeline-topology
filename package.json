@@ -1,11 +1,12 @@
 {
-  "name": "playground",
+  "name": "choreography",
   "version": "1.0.0",
-  "description": "",
-  "main": "topology.js",
+  "description": "Pipeline visualizer for Backstage",
+  "main": "dist/index.js",
   "scripts": {
     "start": "react-scripts start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mkdir -p dist && cp src/*.css dist && tsc --declaration"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,8 @@
   },
   "dependencies": {
     "@patternfly/react-core": "^5.2.0",
+    "@patternfly/react-icons": "^5.2.0",
+    "@patternfly/react-topology": "^5.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
