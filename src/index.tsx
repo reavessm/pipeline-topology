@@ -208,12 +208,11 @@ export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<Topolo
 
     return (
         <VisualizationProvider controller={controller}>
-            <div style={{ width: '100vh', height: '100vw' }}> {/*make visualization surface area larger*/}
-                <VisualizationSurface />
-            </div>
+            <VisualizationSurface />
         </VisualizationProvider>
     );
 };
-//
+
+// Uncomment this to run standalone
 // const container = document.getElementById("root");
 // createRoot(container).render(<TopologyPipelinesGettingStartedDemo />);
