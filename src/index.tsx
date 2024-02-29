@@ -183,8 +183,12 @@ export const PipelineTasks: React.FC = () => {
 
 PipelineTasks.displayName = 'PipelineTasks';
 
-export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
-    let { nodes, edges } = buildNodeAndEdgeModels({ pipelineNodes: TASK_NODES });
+interface TopologyProps {
+    nodeModel: PipelineNodeModel[];
+}
+
+export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<TopologyProps> = ({ nodeModel }) => {
+    let { nodes, edges } = buildNodeAndEdgeModels({ pipelineNodes: nodeModel ? nodeModel : TASK_NODES });
     const controller = new Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
