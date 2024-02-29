@@ -154,11 +154,9 @@ var TopologyPipelinesGettingStartedDemo = function (_a) {
     };
     controller.fromModel(model, false);
     return (React.createElement(react_topology_1.VisualizationProvider, { controller: controller },
-        React.createElement("div", { style: { width: '100vh', height: '100vw' } },
-            " ",
-            React.createElement(react_topology_1.VisualizationSurface, null))));
+        React.createElement(react_topology_1.VisualizationSurface, null)));
 };
 exports.TopologyPipelinesGettingStartedDemo = TopologyPipelinesGettingStartedDemo;
-//
+// Uncomment this to run standalone
 // const container = document.getElementById("root");
 // createRoot(container).render(<TopologyPipelinesGettingStartedDemo />);
