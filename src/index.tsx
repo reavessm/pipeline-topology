@@ -31,144 +31,12 @@ import {
     Layout,
     Model,
     PipelineNodeModel,
-    getEdgesFromNodes,
     DefaultEdge,
-    getSpacerNodes,
     PipelineDagreLayout,
     ComponentFactory,
     NodeModel,
     GraphElement
 } from '@patternfly/react-topology';
-// import {CSSProperties} from "react";
-
-// const HEIGHT = 75;
-// const WIDTH = 225;
-
-// NODE AND EDGE APPROACH
-// const EDGE_MODEL = [
-//     {
-//         id: 'int->int-test-1',
-//         type: 'edge',
-//         source: 'int',
-//         target: 'int-test-1',
-//         edgeStyle: EdgeStyle.dotted
-//     },
-//     {
-//         id: 'int->int-test-2',
-//         type: 'edge',
-//         source: 'int',
-//         target: 'int-test-2',
-//         edgeStyle: EdgeStyle.default
-//     },
-//     {
-//         id: 'int->stage',
-//         type: 'edge',
-//         source: 'int',
-//         target: 'stage',
-//         edgeStyle: EdgeStyle.dashedXl
-//     },
-//     {
-//         id: 'int->canary-a',
-//         type: 'edge',
-//         source: 'stage',
-//         target: 'canary-a',
-//         edgeStyle: EdgeStyle.default
-//     }
-// ];
-//
-// const TASK_NODES: NodeModel[] = [
-//     {
-//         id: 'int',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int label',
-//         data: {gating: true, description: 'stuff'},
-//         width: WIDTH
-//         // width: 180,
-//         // height: 32,
-//         // style: {
-//         //     padding: [45, 15]
-//         // }
-//     },
-//     {
-//         id: 'int-test-1',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int test 1 label',
-//         data: {
-//             status: RunStatus.Failed
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'int-test-2',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int test 2 label',
-//         data: {
-//             status: RunStatus.Idle
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'stage',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'stage label',
-//         // width: 180,
-//         // height: 32,
-//         // style: {
-//         //     padding: [45, 15]
-//         // },
-//         data: {
-//             status: RunStatus.Pending
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'canary-a',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'canary-a label',
-//         data: {
-//             status: RunStatus.FailedToStart
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'int-test-3',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int test 3 label',
-//         data: {
-//             status: RunStatus.Idle
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'int-test-4',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int test 4 label',
-//         data: {
-//             status: RunStatus.Idle
-//         },
-//         width: WIDTH
-//     }
-//     // {
-//     //     id: 'finally-0',
-//     //     type: 'DEFAULT_FINALLY_NODE',
-//     //     label: 'Finally task 0',
-//     //     // width: 156,
-//     //     // height: 32,
-//     //     // style: {
-//     //     //     paddingLeft: 24
-//     //     // }
-//     // },
-//     // {
-//     //     id: 'finally-1',
-//     //     type: 'DEFAULT_FINALLY_NODE',
-//     //     label: 'Finally task 1',
-//     //     // width: 156,
-//     //     // height: 32,
-//     //     // style: {
-//     //     //     paddingLeft: 24
-//     //     // }
-//     // }
-// ];
 
 // PIPELINE NODE MODEL APPROACH
 const TASK_NODES: PipelineNodeModel[] = [
@@ -317,15 +185,10 @@ PipelineTasks.displayName = 'PipelineTasks';
 
 export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
     let { nodes, edges } = buildNodeAndEdgeModels({ pipelineNodes: TASK_NODES });
-    // console.log(nodes);
-    // console.log(edges);
     const controller = new Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
     controller.registerLayoutFactory((_type: string, graph: Graph): Layout | undefined => new PipelineDagreLayout(graph));
-    const spacerNodes = getSpacerNodes(TASK_NODES);
-    // const nodes = [...TASK_NODES, ...spacerNodes];
-    // const edges = getEdgesFromNodes(TASK_NODES);
 
     const model: Model = {
         nodes,
@@ -347,6 +210,6 @@ export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
         </VisualizationProvider>
     );
 };
-
-const container = document.getElementById("root");
-createRoot(container!).render(<TopologyPipelinesGettingStartedDemo />);
+//
+// const container = document.getElementById("root");
+// createRoot(container).render(<TopologyPipelinesGettingStartedDemo />);

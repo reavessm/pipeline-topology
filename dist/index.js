@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TopologyPipelinesGettingStartedDemo = exports.PipelineTasks = void 0;
-var client_1 = require("react-dom/client");
 require("@patternfly/react-core/dist/styles/base.css");
 require("./fonts.css");
 require("./pipeline-styles.css");
@@ -273,7 +272,7 @@ var TopologyPipelinesGettingStartedDemo = function () {
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
     controller.registerLayoutFactory(function (_type, graph) { return new react_topology_1.PipelineDagreLayout(graph); });
-    var spacerNodes = (0, react_topology_1.getSpacerNodes)(TASK_NODES);
+    // const spacerNodes = getSpacerNodes(TASK_NODES);
     // const nodes = [...TASK_NODES, ...spacerNodes];
     // const edges = getEdgesFromNodes(TASK_NODES);
     var model = {
@@ -292,5 +291,6 @@ var TopologyPipelinesGettingStartedDemo = function () {
             React.createElement(react_topology_1.VisualizationSurface, null))));
 };
 exports.TopologyPipelinesGettingStartedDemo = TopologyPipelinesGettingStartedDemo;
-var container = document.getElementById("root");
-(0, client_1.createRoot)(container).render(React.createElement(exports.TopologyPipelinesGettingStartedDemo, null));
+//
+// const container = document.getElementById("root");
+// createRoot(container).render(<TopologyPipelinesGettingStartedDemo />);
