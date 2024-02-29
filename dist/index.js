@@ -8,134 +8,6 @@ var pipeline_to_node_and_edge_1 = require("./pipeline-to-node-and-edge");
 require("@patternfly/react-topology/patternfly-docs/content/examples/./topology-pipelines-example.css");
 var React = require("react");
 var react_topology_1 = require("@patternfly/react-topology");
-// import {CSSProperties} from "react";
-// const HEIGHT = 75;
-// const WIDTH = 225;
-// NODE AND EDGE APPROACH
-// const EDGE_MODEL = [
-//     {
-//         id: 'int->int-test-1',
-//         type: 'edge',
-//         source: 'int',
-//         target: 'int-test-1',
-//         edgeStyle: EdgeStyle.dotted
-//     },
-//     {
-//         id: 'int->int-test-2',
-//         type: 'edge',
-//         source: 'int',
-//         target: 'int-test-2',
-//         edgeStyle: EdgeStyle.default
-//     },
-//     {
-//         id: 'int->stage',
-//         type: 'edge',
-//         source: 'int',
-//         target: 'stage',
-//         edgeStyle: EdgeStyle.dashedXl
-//     },
-//     {
-//         id: 'int->canary-a',
-//         type: 'edge',
-//         source: 'stage',
-//         target: 'canary-a',
-//         edgeStyle: EdgeStyle.default
-//     }
-// ];
-//
-// const TASK_NODES: NodeModel[] = [
-//     {
-//         id: 'int',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int label',
-//         data: {gating: true, description: 'stuff'},
-//         width: WIDTH
-//         // width: 180,
-//         // height: 32,
-//         // style: {
-//         //     padding: [45, 15]
-//         // }
-//     },
-//     {
-//         id: 'int-test-1',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int test 1 label',
-//         data: {
-//             status: RunStatus.Failed
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'int-test-2',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int test 2 label',
-//         data: {
-//             status: RunStatus.Idle
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'stage',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'stage label',
-//         // width: 180,
-//         // height: 32,
-//         // style: {
-//         //     padding: [45, 15]
-//         // },
-//         data: {
-//             status: RunStatus.Pending
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'canary-a',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'canary-a label',
-//         data: {
-//             status: RunStatus.FailedToStart
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'int-test-3',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int test 3 label',
-//         data: {
-//             status: RunStatus.Idle
-//         },
-//         width: WIDTH
-//     },
-//     {
-//         id: 'int-test-4',
-//         type: 'DEFAULT_TASK_NODE',
-//         label: 'int test 4 label',
-//         data: {
-//             status: RunStatus.Idle
-//         },
-//         width: WIDTH
-//     }
-//     // {
-//     //     id: 'finally-0',
-//     //     type: 'DEFAULT_FINALLY_NODE',
-//     //     label: 'Finally task 0',
-//     //     // width: 156,
-//     //     // height: 32,
-//     //     // style: {
-//     //     //     paddingLeft: 24
-//     //     // }
-//     // },
-//     // {
-//     //     id: 'finally-1',
-//     //     type: 'DEFAULT_FINALLY_NODE',
-//     //     label: 'Finally task 1',
-//     //     // width: 156,
-//     //     // height: 32,
-//     //     // style: {
-//     //     //     paddingLeft: 24
-//     //     // }
-//     // }
-// ];
 // PIPELINE NODE MODEL APPROACH
 var TASK_NODES = [
     {
@@ -264,17 +136,13 @@ var PipelineTasks = function () {
 };
 exports.PipelineTasks = PipelineTasks;
 exports.PipelineTasks.displayName = 'PipelineTasks';
-var TopologyPipelinesGettingStartedDemo = function () {
-    var _a = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: TASK_NODES }), nodes = _a.nodes, edges = _a.edges;
-    // console.log(nodes);
-    // console.log(edges);
+var TopologyPipelinesGettingStartedDemo = function (_a) {
+    var nodeModel = _a.nodeModel;
+    var _b = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: nodeModel ? nodeModel : TASK_NODES }), nodes = _b.nodes, edges = _b.edges;
     var controller = new react_topology_1.Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
     controller.registerLayoutFactory(function (_type, graph) { return new react_topology_1.PipelineDagreLayout(graph); });
-    // const spacerNodes = getSpacerNodes(TASK_NODES);
-    // const nodes = [...TASK_NODES, ...spacerNodes];
-    // const edges = getEdgesFromNodes(TASK_NODES);
     var model = {
         nodes: nodes,
         edges: edges,

@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildNodeAndEdgeModels = void 0;
-// import * as React from 'react';
 var react_topology_1 = require("@patternfly/react-topology");
 var buildNodeAndEdgeModels = function (_a) {
     var pipelineNodes = _a.pipelineNodes;
