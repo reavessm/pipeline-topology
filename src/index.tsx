@@ -17,6 +17,7 @@ import {
     GraphComponent,
     ModelKind,
     TaskNode,
+    Edge,
     SpacerNode,
     TaskEdge,
     FinallyNode,
@@ -24,6 +25,7 @@ import {
     DEFAULT_TASK_NODE_TYPE,
     DEFAULT_EDGE_TYPE,
     DEFAULT_SPACER_NODE_TYPE,
+    EdgeTerminalType,
     Node,
     RunStatus,
     Graph,
@@ -122,6 +124,18 @@ const TASK_NODES: PipelineNodeModel[] = [
     }
 ];
 
+interface DataEdgeProps {
+    element: Edge;
+}
+
+const DataEdge: React.FC<DataEdgeProps> = ({ element, ...rest }) => (
+    <DefaultEdge
+        element={element}
+        endTerminalType={EdgeTerminalType.none}
+        {...rest}
+    />
+);
+
 interface DemoTaskNodeProps {
     element: Node<NodeModel, any> | Graph<GraphModel, any> | GraphElement;
 }
@@ -152,8 +166,10 @@ const pipelineComponentFactory: ComponentFactory = (kind: ModelKind, type: strin
         case 'finally-spacer-edge':
         case DEFAULT_EDGE_TYPE:
             return TaskEdge;
+        case 'data-edge':
+            return DataEdge;
         case ModelKind.edge:
-            return DefaultEdge;
+            return DataEdge;
         default:
             return undefined;
     }

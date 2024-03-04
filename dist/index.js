@@ -1,6 +1,29 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TopologyPipelinesGettingStartedDemo = exports.PipelineTasks = void 0;
+var client_1 = require("react-dom/client");
 require("@patternfly/react-core/dist/styles/base.css");
 require("./fonts.css");
 require("./pipeline-styles.css");
@@ -33,7 +56,7 @@ var TASK_NODES = [
         data: {
             status: react_topology_1.RunStatus.Succeeded,
             gating: true,
-            hash: 'spaghet1234'
+            hash: 'spaghet1234' // TODO: see if i can make edges less ugly?
         }
     },
     {
@@ -91,6 +114,10 @@ var TASK_NODES = [
         }
     }
 ];
+var DataEdge = function (_a) {
+    var element = _a.element, rest = __rest(_a, ["element"]);
+    return (React.createElement(react_topology_1.DefaultEdge, __assign({ element: element, endTerminalType: react_topology_1.EdgeTerminalType.none }, rest)));
+};
 var DemoTaskNode = function (_a) {
     var element = _a.element;
     var data = element.getData();
@@ -100,6 +127,7 @@ var pipelineComponentFactory = function (kind, type) {
     if (kind === react_topology_1.ModelKind.graph) {
         return react_topology_1.GraphComponent;
     }
+    console.log("kind: ".concat(kind, " \ntype: ").concat(type));
     switch (type) {
         case react_topology_1.DEFAULT_TASK_NODE_TYPE:
             return DemoTaskNode; // TODO: as far as I can assume all nodes should be this type <-
@@ -114,8 +142,10 @@ var pipelineComponentFactory = function (kind, type) {
         case 'finally-spacer-edge':
         case react_topology_1.DEFAULT_EDGE_TYPE:
             return react_topology_1.TaskEdge;
+        case 'data-edge':
+            return DataEdge;
         case react_topology_1.ModelKind.edge:
-            return react_topology_1.DefaultEdge;
+            return DataEdge;
         default:
             return undefined;
     }
@@ -136,9 +166,11 @@ var PipelineTasks = function () {
 };
 exports.PipelineTasks = PipelineTasks;
 exports.PipelineTasks.displayName = 'PipelineTasks';
+// interface TopologyProps {
+//     nodeModel: PipelineNodeModel[];
+// }
 var TopologyPipelinesGettingStartedDemo = function (_a) {
-    var nodeModel = _a.nodeModel;
-    var _b = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: nodeModel ? nodeModel : TASK_NODES }), nodes = _b.nodes, edges = _b.edges;
+    var _b = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: TASK_NODES }), nodes = _b.nodes, edges = _b.edges;
     var controller = new react_topology_1.Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
@@ -158,5 +190,5 @@ var TopologyPipelinesGettingStartedDemo = function (_a) {
 };
 exports.TopologyPipelinesGettingStartedDemo = TopologyPipelinesGettingStartedDemo;
 // Uncomment this to run standalone
-// const container = document.getElementById("root");
-// createRoot(container).render(<TopologyPipelinesGettingStartedDemo />);
+var container = document.getElementById("root");
+(0, client_1.createRoot)(container).render(React.createElement(exports.TopologyPipelinesGettingStartedDemo, null));
