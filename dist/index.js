@@ -23,7 +23,6 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TopologyPipelinesGettingStartedDemo = exports.PipelineTasks = void 0;
-var client_1 = require("react-dom/client");
 require("@patternfly/react-core/dist/styles/base.css");
 require("./fonts.css");
 require("./pipeline-styles.css");
@@ -56,7 +55,7 @@ var TASK_NODES = [
         data: {
             status: react_topology_1.RunStatus.Succeeded,
             gating: true,
-            hash: 'spaghet1234' // TODO: see if i can make edges less ugly?
+            hash: 'spaghet1234'
         }
     },
     {
@@ -127,7 +126,6 @@ var pipelineComponentFactory = function (kind, type) {
     if (kind === react_topology_1.ModelKind.graph) {
         return react_topology_1.GraphComponent;
     }
-    console.log("kind: ".concat(kind, " \ntype: ").concat(type));
     switch (type) {
         case react_topology_1.DEFAULT_TASK_NODE_TYPE:
             return DemoTaskNode; // TODO: as far as I can assume all nodes should be this type <-
@@ -166,11 +164,9 @@ var PipelineTasks = function () {
 };
 exports.PipelineTasks = PipelineTasks;
 exports.PipelineTasks.displayName = 'PipelineTasks';
-// interface TopologyProps {
-//     nodeModel: PipelineNodeModel[];
-// }
 var TopologyPipelinesGettingStartedDemo = function (_a) {
-    var _b = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: TASK_NODES }), nodes = _b.nodes, edges = _b.edges;
+    var nodeModel = _a.nodeModel;
+    var _b = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: nodeModel ? nodeModel : TASK_NODES }), nodes = _b.nodes, edges = _b.edges;
     var controller = new react_topology_1.Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
@@ -190,5 +186,5 @@ var TopologyPipelinesGettingStartedDemo = function (_a) {
 };
 exports.TopologyPipelinesGettingStartedDemo = TopologyPipelinesGettingStartedDemo;
 // Uncomment this to run standalone
-var container = document.getElementById("root");
-(0, client_1.createRoot)(container).render(React.createElement(exports.TopologyPipelinesGettingStartedDemo, null));
+// const container = document.getElementById("root");
+// createRoot(container).render(<TopologyPipelinesGettingStartedDemo />);
