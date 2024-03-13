@@ -330,9 +330,8 @@ export const PipelineTasks: React.FC = () => {
 PipelineTasks.displayName = 'PipelineTasks';
 
 interface TopologyProps {
-    name: string;
-    nodeJSON: string;
-    //nodeModel: PipelineNodeModel[];
+    name?: string;
+    nodeJSON?: string;
 }
 
 export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<TopologyProps> = ({name = "osd-fleet-manager", nodeJSON = FROM_JSON}) => {
