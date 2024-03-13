@@ -330,13 +330,12 @@ export const PipelineTasks: React.FC = () => {
 PipelineTasks.displayName = 'PipelineTasks';
 
 interface TopologyProps {
-    nodeModel: PipelineNodeModel[];
+    name: string;
+    nodeJSON: string;
 }
 
-export const TopologyPipelinesGettingStartedDemo: React.FC = () => {
-    // TODO: Stephen, get name from backstage api somehow, thanks :)
-    const name = "osd-fleet-manager";
-    let { nodes, edges } = buildNodeAndEdgeModels({pipelineNodes: buildPipelineNodelModel(name, FROM_JSON)});
+export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<TopologyProps> = ({ name, nodeJSON }) => {
+    let { nodes, edges } = buildNodeAndEdgeModels({pipelineNodes: buildPipelineNodelModel(name, nodeJSON)});
     const controller = new Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);

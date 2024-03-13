@@ -166,10 +166,9 @@ var PipelineTasks = function () {
 };
 exports.PipelineTasks = PipelineTasks;
 exports.PipelineTasks.displayName = 'PipelineTasks';
-var TopologyPipelinesGettingStartedDemo = function () {
-    // TODO: Stephen, get name from backstage api somehow, thanks :)
-    var name = "osd-fleet-manager";
-    var _a = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: (0, json_to_pipeline_1.buildPipelineNodelModel)(name, FROM_JSON) }), nodes = _a.nodes, edges = _a.edges;
+var TopologyPipelinesGettingStartedDemo = function (_a) {
+    var name = _a.name, nodeJSON = _a.nodeJSON;
+    var _b = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: (0, json_to_pipeline_1.buildPipelineNodelModel)(name, nodeJSON) }), nodes = _b.nodes, edges = _b.edges;
     var controller = new react_topology_1.Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);
