@@ -19,7 +19,7 @@ var buildPipelineNodelModel = function (service, configMap) {
                     status: dict[key]["deployment_state"],
                     hash: dict[key]["commit_sha"]
                 },
-                runAfterTasks: dict[key]["runsAfter"], //TODO: runAfterTasks
+                // runAfterTasks: dict[key][runAfter] TODO: runAfterTasks
                 style: {
                     padding: padding
                 }
