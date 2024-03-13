@@ -23,7 +23,7 @@ export const buildPipelineNodelModel = (service: string, configMap: string) => {
                     status: dict[key]["deployment_state"],
                     hash: dict[key]["commit_sha"]
                 },
-                // runAfterTasks: dict[key][runAfter] TODO: runAfterTasks
+                runAfterTasks: dict[key]["runsAfter"], //TODO: runAfterTasks
                 style: {
                     padding: padding
                 }
