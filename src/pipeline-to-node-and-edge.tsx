@@ -9,7 +9,7 @@ interface Props {
     pipelineNodes: PipelineNodeModel[];
 }
 
-export const buildNodeAndEdgeModels = ({ pipelineNodes }: Props): { nodes: NodeModel[], edges: EdgeModel[] } => {
+export const buildNodeAndEdgeModels = ({ pipelineNodes }): { nodes: NodeModel[], edges: EdgeModel[] } => {
     const nodes: NodeModel[] = [];
     const edges: EdgeModel[] = [];
 
