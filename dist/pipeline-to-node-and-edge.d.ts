@@ -1,9 +1,7 @@
-import { NodeModel, EdgeModel, PipelineNodeModel } from '@patternfly/react-topology';
-interface Props {
-    pipelineNodes: PipelineNodeModel[];
-}
-export declare const buildNodeAndEdgeModels: ({ pipelineNodes }: Props) => {
+import { NodeModel, EdgeModel } from '@patternfly/react-topology';
+export declare const buildNodeAndEdgeModels: ({ pipelineNodes }: {
+    pipelineNodes: any;
+}) => {
     nodes: NodeModel[];
     edges: EdgeModel[];
 };
-export {};
