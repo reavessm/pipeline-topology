@@ -122,7 +122,7 @@ var DataEdge = function (_a) {
 var DemoTaskNode = function (_a) {
     var element = _a.element;
     var data = element.getData();
-    return (React.createElement(react_topology_1.TaskNode, { element: element, status: data === null || data === void 0 ? void 0 : data.status, toolTip: JSON.stringify(data) }));
+    return (React.createElement(react_topology_1.TaskNode, { element: element, status: data === null || data === void 0 ? void 0 : data.status, toolTip: JSON.stringify(data), truncateLength: 120, badge: data['hash'].substring(0, 6) }));
 };
 var pipelineComponentFactory = function (kind, type) {
     if (kind === react_topology_1.ModelKind.graph) {

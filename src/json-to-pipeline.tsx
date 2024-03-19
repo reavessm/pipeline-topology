@@ -1,22 +1,23 @@
-import PipelineNodeModel from '@patternfly/react-topology'
+import { PipelineNodeModel, NodeModel } from '@patternfly/react-topology'
 
 interface NestedDict {
     [key: string]: { [key: string]: string };
 }
 
-const width = 180;
+const width = 555;
 const height = 32;
 const padding = [45, 15];
 
 export const buildPipelineNodelModel = (service: string, configMap: string) => {
     const dict: NestedDict = JSON.parse(configMap);
-    const pipelineNodeModel = [];
+    const pipelineNodeModel : PipelineNodeModel[] = [];
     for (const key in dict) {
         if (key.startsWith(service)) {
-            const pipelineNode = {
+            const keyStr = key.split("/")
+            const pipelineNode : NodeModel = {
                 id: key,
                 type: 'DEFAULT_TASK_NODE',
-                label: key,
+                label: `${keyStr[keyStr.length-1]} ${keyStr[keyStr.length-2]}`,
                 width: width,
                 height: height,
                 data: {
