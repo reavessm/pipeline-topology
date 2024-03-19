@@ -274,7 +274,7 @@ const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({ element }) =
     const data = element.getData();
 
     return (
-        <TaskNode element={element} status={data?.status} toolTip={JSON.stringify(data)}></TaskNode>
+        <TaskNode element={element} status={data?.status} toolTip={JSON.stringify(data)} truncateLength={120} badge={data['hash'].substring(0,6)}></TaskNode>
     );
 };
 
