@@ -7,6 +7,7 @@ export declare const PipelineTasks: React.FC;
 interface TopologyProps {
     name: string;
     nodeJSON: string;
+    scale: number;
 }
 export declare const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<TopologyProps>;
 export {};

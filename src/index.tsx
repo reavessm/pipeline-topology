@@ -332,9 +332,10 @@ PipelineTasks.displayName = 'PipelineTasks';
 interface TopologyProps {
     name: string;
     nodeJSON: string;
+    scale: number;
 }
 
-export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<TopologyProps> = ({ name, nodeJSON }) => {
+export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<TopologyProps> = ({ name, nodeJSON, scale }) => {
     let { nodes, edges } = buildNodeAndEdgeModels({pipelineNodes: buildPipelineNodelModel(name, nodeJSON)});
     const controller = new Visualization();
     controller.setFitToScreenOnLayout(true);
@@ -348,7 +349,7 @@ export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<Topolo
             id: 'g1',
             type: 'graph',
             layout: 'pipelineLayout',
-            scale: 50
+            scale: scale
         }
     };
 
