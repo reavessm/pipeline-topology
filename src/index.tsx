@@ -338,7 +338,7 @@ interface TopologyProps {
 }
 
 export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<TopologyProps> = ({ name, nodeJSON, scale, scaleExtent }) => {
-    let { nodes, edges } = buildNodeAndEdgeModels({pipelineNodes: buildPipelineNodelModel(name, nodeJSON)});
+    let { nodes, edges } = buildNodeAndEdgeModels({pipelineNodes: buildPipelineNodelModel(name, nodeJSON, scale)});
     const controller = new Visualization();
     controller.setFitToScreenOnLayout(true);
     controller.registerComponentFactory(pipelineComponentFactory);

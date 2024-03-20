@@ -8,7 +8,8 @@ const width = 555;
 const height = 32;
 const padding = [45, 15];
 
-export const buildPipelineNodelModel = (service: string, configMap: string) => {
+export const buildPipelineNodelModel = (service: string, configMap: string,
+    scale: number) => {
     const dict: NestedDict = JSON.parse(configMap);
     const pipelineNodeModel : PipelineNodeModel[] = [];
     for (const key in dict) {
@@ -18,8 +19,8 @@ export const buildPipelineNodelModel = (service: string, configMap: string) => {
                 id: key,
                 type: 'DEFAULT_TASK_NODE',
                 label: `${keyStr[keyStr.length-1]} ${keyStr[keyStr.length-2]}`,
-                width: width,
-                height: height,
+                width: width * scale,
+                height: height * scale,
                 data: {
                     status: dict[key]["deployment_state"],
                     hash: dict[key]["commit_sha"]

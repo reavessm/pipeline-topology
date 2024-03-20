@@ -4,7 +4,7 @@ exports.buildPipelineNodelModel = void 0;
 var width = 555;
 var height = 32;
 var padding = [45, 15];
-var buildPipelineNodelModel = function (service, configMap) {
+var buildPipelineNodelModel = function (service, configMap, scale) {
     var dict = JSON.parse(configMap);
     var pipelineNodeModel = [];
     for (var key in dict) {
@@ -14,8 +14,8 @@ var buildPipelineNodelModel = function (service, configMap) {
                 id: key,
                 type: 'DEFAULT_TASK_NODE',
                 label: "".concat(keyStr[keyStr.length - 1], " ").concat(keyStr[keyStr.length - 2]),
-                width: width,
-                height: height,
+                width: width * scale,
+                height: height * scale,
                 data: {
                     status: dict[key]["deployment_state"],
                     hash: dict[key]["commit_sha"]
