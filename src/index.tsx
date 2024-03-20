@@ -347,7 +347,8 @@ export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<Topolo
         graph: {
             id: 'g1',
             type: 'graph',
-            layout: 'pipelineLayout'
+            layout: 'pipelineLayout',
+            scale: 50
         }
     };
 

@@ -179,7 +179,8 @@ var TopologyPipelinesGettingStartedDemo = function (_a) {
         graph: {
             id: 'g1',
             type: 'graph',
-            layout: 'pipelineLayout'
+            layout: 'pipelineLayout',
+            scale: 50
         }
     };
     controller.fromModel(model, false);
