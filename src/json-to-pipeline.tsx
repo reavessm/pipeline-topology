@@ -9,7 +9,7 @@ const height = 32;
 const padding = [45, 15];
 
 export const buildPipelineNodelModel = (service: string, configMap: string,
-    scale: number) => {
+) => {
     const dict: NestedDict = JSON.parse(configMap);
     const pipelineNodeModel : PipelineNodeModel[] = [];
     for (const key in dict) {
@@ -27,8 +27,7 @@ export const buildPipelineNodelModel = (service: string, configMap: string,
                 },
                 // runAfterTasks: dict[key][runAfter] TODO: runAfterTasks
                 style: {
-                    padding: padding,
-                    scale: scale
+                    padding: padding
                 }
             }
             pipelineNodeModel.push(pipelineNode);

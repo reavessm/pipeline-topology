@@ -4,7 +4,7 @@ exports.buildPipelineNodelModel = void 0;
 var width = 555;
 var height = 32;
 var padding = [45, 15];
-var buildPipelineNodelModel = function (service, configMap, scale) {
+var buildPipelineNodelModel = function (service, configMap) {
     var dict = JSON.parse(configMap);
     var pipelineNodeModel = [];
     for (var key in dict) {
@@ -22,8 +22,7 @@ var buildPipelineNodelModel = function (service, configMap, scale) {
                 },
                 // runAfterTasks: dict[key][runAfter] TODO: runAfterTasks
                 style: {
-                    padding: padding,
-                    scale: scale
+                    padding: padding
                 }
             };
             pipelineNodeModel.push(pipelineNode);
