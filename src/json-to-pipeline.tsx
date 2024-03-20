@@ -19,15 +19,16 @@ export const buildPipelineNodelModel = (service: string, configMap: string,
                 id: key,
                 type: 'DEFAULT_TASK_NODE',
                 label: `${keyStr[keyStr.length-1]} ${keyStr[keyStr.length-2]}`,
-                width: width * scale,
-                height: height * scale,
+                width: width,
+                height: height,
                 data: {
                     status: dict[key]["deployment_state"],
                     hash: dict[key]["commit_sha"]
                 },
                 // runAfterTasks: dict[key][runAfter] TODO: runAfterTasks
                 style: {
-                    padding: padding
+                    padding: padding,
+                    scale: scale
                 }
             }
             pipelineNodeModel.push(pipelineNode);
