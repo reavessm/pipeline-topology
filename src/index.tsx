@@ -33,6 +33,7 @@ import {
     GraphModel,
     Layout,
     Model,
+    ScaleExtent,
     PipelineNodeModel,
     DefaultEdge,
     PipelineDagreLayout,
@@ -333,9 +334,10 @@ interface TopologyProps {
     name: string;
     nodeJSON: string;
     scale: number;
+    scaleExtent: ScaleExtent;
 }
 
-export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<TopologyProps> = ({ name, nodeJSON, scale }) => {
+export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<TopologyProps> = ({ name, nodeJSON, scale, scaleExtent }) => {
     let { nodes, edges } = buildNodeAndEdgeModels({pipelineNodes: buildPipelineNodelModel(name, nodeJSON)});
     const controller = new Visualization();
     controller.setFitToScreenOnLayout(true);
@@ -349,7 +351,8 @@ export const TopologyPipelinesGettingStartedDemo: React.FunctionComponent<Topolo
             id: 'g1',
             type: 'graph',
             layout: 'pipelineLayout',
-            scale: scale
+            scale: scale,
+            scaleExtent: scaleExtent
         }
     };
 

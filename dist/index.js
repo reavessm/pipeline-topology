@@ -167,7 +167,7 @@ var PipelineTasks = function () {
 exports.PipelineTasks = PipelineTasks;
 exports.PipelineTasks.displayName = 'PipelineTasks';
 var TopologyPipelinesGettingStartedDemo = function (_a) {
-    var name = _a.name, nodeJSON = _a.nodeJSON, scale = _a.scale;
+    var name = _a.name, nodeJSON = _a.nodeJSON, scale = _a.scale, scaleExtent = _a.scaleExtent;
     var _b = (0, pipeline_to_node_and_edge_1.buildNodeAndEdgeModels)({ pipelineNodes: (0, json_to_pipeline_1.buildPipelineNodelModel)(name, nodeJSON) }), nodes = _b.nodes, edges = _b.edges;
     var controller = new react_topology_1.Visualization();
     controller.setFitToScreenOnLayout(true);
@@ -180,7 +180,8 @@ var TopologyPipelinesGettingStartedDemo = function (_a) {
             id: 'g1',
             type: 'graph',
             layout: 'pipelineLayout',
-            scale: scale
+            scale: scale,
+            scaleExtent: scaleExtent
         }
     };
     controller.fromModel(model, false);
